@@ -3,8 +3,11 @@ include NativeElement
 @react.component @module("react-native")
 external make: (
   ~ref: ref=?,
-  ~accessibilityLabel: // Button props
-  string=?,
+  // Button props
+  ~accessibilityActions: array<Accessibility.actionInfo>=?,
+  ~accessibilityLabel: string=?,
+  ~accessibilityState: Accessibility.state=?,
+  ~accessible: bool=?,
   ~color: Color.t=?,
   ~disabled: bool=?,
   ~hasTVPreferredFocus: bool=?,
@@ -13,6 +16,7 @@ external make: (
   ~nextFocusLeft: int=?,
   ~nextFocusRight: int=?,
   ~nextFocusUp: int=?,
+  ~onAccessibilityAction: Accessibility.actionEvent => unit=?,
   ~onPress: Event.pressEvent => unit,
   ~testID: string=?,
   ~title: string,

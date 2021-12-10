@@ -23,15 +23,16 @@ type textBreakStrategy = [#simple | #highQuality | #balanced]
 @react.component @module("react-native")
 external make: (
   ~ref: ref=?,
-  ~accessibilityHint: // Text props
-  string=?,
-  ~android_hyphenationFrequency: android_hyphenationFrequency=?,
+  // Text props
+  ~accessibilityActions: array<Accessibility.actionInfo>=?,
+  ~accessibilityHint: string=?,
   ~accessibilityLabel: string=?,
   ~accessibilityRole: Accessibility.role=?,
   ~accessibilityState: Accessibility.state=?,
   ~accessible: bool=?,
   ~adjustsFontSizeToFit: bool=?,
   ~allowFontScaling: bool=?,
+  ~android_hyphenationFrequency: android_hyphenationFrequency=?,
   ~ariaLevel: int=?,
   ~children: React.element=?,
   ~dataDetectorTypes: array<dataDetectorType>=?,
@@ -41,9 +42,12 @@ external make: (
   ~minimumFontScale: float=?,
   ~nativeID: string=?,
   ~numberOfLines: int=?,
+  ~onAccessibilityAction: Accessibility.actionEvent => unit=?,
   ~onLayout: Event.layoutEvent => unit=?,
   ~onLongPress: Event.pressEvent => unit=?,
   ~onPress: Event.pressEvent => unit=?,
+  ~onPressIn: Event.pressEvent => unit=?,
+  ~onPressOut: Event.pressEvent => unit=?,
   ~onTextLayout: Event.textLayoutEvent => unit=?,
   ~pressRetentionOffset: View.edgeInsets=?,
   ~selectable: bool=?,
@@ -53,8 +57,8 @@ external make: (
   ~testID: string=?,
   ~textBreakStrategy: textBreakStrategy=?,
   ~value: string=?,
-  ~onMoveShouldSetResponder: // Gesture Responder props
-  Event.pressEvent => bool=?,
+  // Gesture Responder props
+  ~onMoveShouldSetResponder: Event.pressEvent => bool=?,
   ~onMoveShouldSetResponderCapture: Event.pressEvent => bool=?,
   ~onResponderEnd: Event.pressEvent => unit=?,
   ~onResponderGrant: Event.pressEvent => unit=?,
@@ -66,26 +70,9 @@ external make: (
   ~onResponderTerminationRequest: Event.pressEvent => bool=?,
   ~onStartShouldSetResponder: Event.pressEvent => bool=?,
   ~onStartShouldSetResponderCapture: Event.pressEvent => bool=?,
-  ~rel: // React Native Web Props
-  @string
-  [
-    | #alternate
-    | #author
-    | @as("dns-prefetch") #dnsPrefetch
-    | #icon
-    | #license
-    | #next
-    | #pingback
-    | #preconnect
-    | #prefetch
-    | #preload
-    | #prerender
-    | #prev
-    | #search
-    | #stylesheet
-  ]=?,
+  // react-native-web 0.16 View props
   ~href: string=?,
-  ~target: Web.target=?,
+  ~hrefAttrs: Web.hrefAttrs=?,
   ~onMouseDown: ReactEvent.Mouse.t => unit=?,
   ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
   ~onMouseLeave: ReactEvent.Mouse.t => unit=?,

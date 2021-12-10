@@ -8,8 +8,8 @@ external make: (
   ~hasTVPreferredFocus: bool=?,
   ~style: Style.t=?,
   ~tvParallaxProperties: TV.parallax=?,
-  ~accessible: // TouchableWithoutFeedback props
-  bool=?,
+  // TouchableWithoutFeedback props
+  ~accessible: bool=?,
   ~accessibilityElementsHidden: bool=?,
   ~accessibilityHint: string=?,
   ~accessibilityIgnoresInvertColors: bool=?,
@@ -40,24 +40,14 @@ external make: (
   ~testID: string=?,
   ~touchSoundDisabled: bool=?,
   ~children: React.element=?,
-  ~rel: // React Native Web Props
-  @string
-  [
-    | #alternate
-    | #author
-    | @as("dns-prefetch") #dnsPrefetch
-    | #icon
-    | #license
-    | #next
-    | #pingback
-    | #preconnect
-    | #prefetch
-    | #preload
-    | #prerender
-    | #prev
-    | #search
-    | #stylesheet
-  ]=?,
+  // react-native-web 0.16 Touchable (View) props
   ~href: string=?,
-  ~target: Web.target=?,
+  ~hrefAttrs: Web.hrefAttrs=?,
+  ~onMouseDown: ReactEvent.Mouse.t => unit=?,
+  ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+  ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+  ~onMouseMove: ReactEvent.Mouse.t => unit=?,
+  ~onMouseOver: ReactEvent.Mouse.t => unit=?,
+  ~onMouseOut: ReactEvent.Mouse.t => unit=?,
+  ~onMouseUp: ReactEvent.Mouse.t => unit=?,
 ) => React.element = "TouchableOpacity"

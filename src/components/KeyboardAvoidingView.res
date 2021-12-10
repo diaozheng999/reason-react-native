@@ -5,12 +5,13 @@ type behavior = [#height | #position | #padding]
 @react.component @module("react-native")
 external make: (
   ~ref: ref=?,
-  ~keyboardVerticalOffset: // KeyboardAvoidingView props
-  float=?,
+  // KeyboardAvoidingView props
   ~behavior: behavior=?,
   ~contentContainerStyle: Style.t=?,
-  ~accessibilityActions: // View props 0.63.0
-  array<Accessibility.actionInfo>=?,
+  ~enabled: bool=?,
+  ~keyboardVerticalOffset: float=?,
+  // rescript-react-native 0.64 || 0.65 || 0.66 View props
+  ~accessibilityActions: array<Accessibility.actionInfo>=?,
   ~accessibilityElementsHidden: bool=?,
   ~accessibilityHint: string=?,
   ~accessibilityIgnoresInvertColors: bool=?,
@@ -37,8 +38,8 @@ external make: (
   ~onAccessibilityTap: unit => unit=?,
   ~onLayout: Event.layoutEvent => unit=?,
   ~onMagicTap: unit => unit=?,
-  ~onMoveShouldSetResponder: // Gesture Responder props
-  Event.pressEvent => bool=?,
+  // Gesture Responder props
+  ~onMoveShouldSetResponder: Event.pressEvent => bool=?,
   ~onMoveShouldSetResponderCapture: Event.pressEvent => bool=?,
   ~onResponderEnd: Event.pressEvent => unit=?,
   ~onResponderGrant: Event.pressEvent => unit=?,
@@ -63,8 +64,10 @@ external make: (
   ~style: Style.t=?,
   ~testID: string=?,
   ~children: React.element=?,
-  ~onMouseDown: // React Native Web Props
-  ReactEvent.Mouse.t => unit=?,
+  // react-native-web 0.16 View props
+  ~href: string=?,
+  ~hrefAttrs: Web.hrefAttrs=?,
+  ~onMouseDown: ReactEvent.Mouse.t => unit=?,
   ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
   ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
   ~onMouseMove: ReactEvent.Mouse.t => unit=?,

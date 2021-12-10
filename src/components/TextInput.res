@@ -94,6 +94,46 @@ type keyPressEvent = KeyPressEvent.t
 
 type autoCapitalize = [#characters | #words | #sentences | #none]
 
+type autoComplete = [
+  | #"birthdate-day"
+  | #"birthdate-full"
+  | #"birthdate-month"
+  | #"birthdate-year"
+  | #"cc-csc"
+  | #"cc-exp-day"
+  | #"cc-exp-month"
+  | #"cc-exp-year"
+  | #"cc-exp"
+  | #"cc-number"
+  | #"name-family"
+  | #"name-given"
+  | #"name-middle-initial"
+  | #"name-middle"
+  | #"name-prefix"
+  | #"name-suffix"
+  | #"password-new"
+  | #"postal-address-country"
+  | #"postal-address-extended-postal-code"
+  | #"postal-address-extended"
+  | #"postal-address-locality"
+  | #"postal-address-region"
+  | #"postal-address"
+  | #"postal-code"
+  | #"sms-otp"
+  | #"street-address"
+  | #"tel-country-code"
+  | #"tel-device"
+  | #"tel-national"
+  | #"username-new"
+  | #email
+  | #gender
+  | #name
+  | #off
+  | #password
+  | #tel
+  | #username
+]
+
 type t
 
 type importantForAutofill = [
@@ -142,25 +182,10 @@ type textContentType = [
 @react.component @module("react-native")
 external make: (
   ~ref: ref=?,
-  ~allowFontScaling: // TextInput props
-  bool=?,
+  // TextInput props
+  ~allowFontScaling: bool=?,
   ~autoCapitalize: autoCapitalize=?,
-  ~autoCompleteType: @string
-  [
-    | #off
-    | #username
-    | #password
-    | #email
-    | #name
-    | #tel
-    | @as("street-address") #streetAddress
-    | @as("postal-code") #postalCode
-    | @as("cc-number") #ccNumber
-    | @as("cc-csc") #ccCsc
-    | @as("cc-exp") #ccExp
-    | @as("cc-exp-month") #ccExpMonth
-    | @as("cc-exp-year") #ccExpYear
-  ]=?,
+  ~autoComplete: autoComplete=?,
   ~autoCorrect: bool=?,
   ~autoFocus: bool=?,
   ~blurOnSubmit: bool=?,
@@ -246,8 +271,8 @@ external make: (
   ~textContentType: textContentType=?,
   ~underlineColorAndroid: Color.t=?,
   ~value: string=?,
-  ~accessibilityActions: // View props 0.63.0
-  array<Accessibility.actionInfo>=?,
+  // rescript-react-native 0.64 || 0.65 || 0.66 View props
+  ~accessibilityActions: array<Accessibility.actionInfo>=?,
   ~accessibilityElementsHidden: bool=?,
   ~accessibilityHint: string=?,
   ~accessibilityIgnoresInvertColors: bool=?,
@@ -274,8 +299,8 @@ external make: (
   ~onAccessibilityTap: unit => unit=?,
   ~onLayout: Event.layoutEvent => unit=?,
   ~onMagicTap: unit => unit=?,
-  ~onMoveShouldSetResponder: // Gesture Responder props
-  Event.pressEvent => bool=?,
+  // Gesture Responder props
+  ~onMoveShouldSetResponder: Event.pressEvent => bool=?,
   ~onMoveShouldSetResponderCapture: Event.pressEvent => bool=?,
   ~onResponderEnd: Event.pressEvent => unit=?,
   ~onResponderGrant: Event.pressEvent => unit=?,
@@ -300,8 +325,10 @@ external make: (
   ~style: Style.t=?,
   ~testID: string=?,
   ~children: React.element=?,
-  ~onMouseDown: // React Native Web Props
-  ReactEvent.Mouse.t => unit=?,
+  // react-native-web 0.16 View props
+  ~href: string=?,
+  ~hrefAttrs: Web.hrefAttrs=?,
+  ~onMouseDown: ReactEvent.Mouse.t => unit=?,
   ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
   ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
   ~onMouseMove: ReactEvent.Mouse.t => unit=?,

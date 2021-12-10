@@ -4,8 +4,9 @@ type rippleConfig
 
 @obj
 external rippleConfig: (
-  ~color: Color.t=?,
   ~borderless: bool=?,
+  ~color: Color.t=?,
+  ~foreground: bool=?,
   ~radius: float=?,
   unit,
 ) => rippleConfig = ""
@@ -20,8 +21,8 @@ type interactionState = {
 @react.component @module("react-native")
 external make: (
   ~ref: ref=?,
-  ~accessibilityActions: // Accessibility props
-  array<Accessibility.actionInfo>=?,
+  // Accessibility props
+  ~accessibilityActions: array<Accessibility.actionInfo>=?,
   ~accessibilityElementsHidden: bool=?,
   ~accessibilityHint: string=?,
   ~accessibilityIgnoresInvertColors: bool=?,
@@ -40,13 +41,15 @@ external make: (
     | #no
     | @as("no-hide-descendants") #noHideDescendants
   ]=?,
-  ~android_disableSound: // Pressable props
-  bool=?,
+  // Pressable props
+  ~android_disableSound: bool=?,
   ~android_ripple: rippleConfig=?,
   ~children: interactionState => React.element=?,
   ~delayLongPress: int=?,
   ~disabled: bool=?,
   ~hitSlop: View.edgeInsets=?,
+  ~onBlur: Event.blurEvent => unit=?,
+  ~onFocus: Event.focusEvent => unit=?,
   ~onLayout: Event.layoutEvent => unit=?,
   ~onLongPress: Event.pressEvent => unit=?,
   ~onPress: Event.pressEvent => unit=?,
@@ -56,24 +59,11 @@ external make: (
   ~style: interactionState => Style.t=?,
   ~testID: string=?,
   ~testOnly_pressed: bool=?,
-  ~rel: // React Native Web Props
-  @string
-  [
-    | #alternate
-    | #author
-    | @as("dns-prefetch") #dnsPrefetch
-    | #icon
-    | #license
-    | #next
-    | #pingback
-    | #preconnect
-    | #prefetch
-    | #preload
-    | #prerender
-    | #prev
-    | #search
-    | #stylesheet
-  ]=?,
+  ~unstable_pressDelay: int=?,
+  // react-native-web 0.16 Pressable (View) props
   ~href: string=?,
-  ~target: Web.target=?,
+  ~hrefAttrs: Web.hrefAttrs=?,
+  // react-native-web 0.16 Pressable props
+  ~onHoverIn: ReactEvent.Mouse.t => unit=?,
+  ~onHoverOut: ReactEvent.Mouse.t => unit=?,
 ) => React.element = "Pressable"
